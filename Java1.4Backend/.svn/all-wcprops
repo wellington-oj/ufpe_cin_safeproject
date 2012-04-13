@@ -1,0 +1,125 @@
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/jastadd-oxford/projects/!svn/ver/9143/trunk/JastAddJ/Java1.4Backend
+END
+JVMBytecodes.jrag
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/jastadd-oxford/projects/!svn/ver/5114/trunk/JastAddJ/Java1.4Backend/JVMBytecodes.jrag
+END
+LICENSE
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/jastadd-oxford/projects/!svn/ver/5114/trunk/JastAddJ/Java1.4Backend/LICENSE
+END
+CreateBCode.jrag
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/jastadd-oxford/projects/!svn/ver/9128/trunk/JastAddJ/Java1.4Backend/CreateBCode.jrag
+END
+.project
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/jastadd-oxford/projects/!svn/ver/4540/trunk/JastAddJ/Java1.4Backend/.project
+END
+JVMBytecodesDebug.jrag
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/jastadd-oxford/projects/!svn/ver/5114/trunk/JastAddJ/Java1.4Backend/JVMBytecodesDebug.jrag
+END
+ConstantPoolNames.jrag
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/jastadd-oxford/projects/!svn/ver/5589/trunk/JastAddJ/Java1.4Backend/ConstantPoolNames.jrag
+END
+JavaCompiler.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/jastadd-oxford/projects/!svn/ver/5589/trunk/JastAddJ/Java1.4Backend/JavaCompiler.java
+END
+LocalNum.jrag
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/jastadd-oxford/projects/!svn/ver/9128/trunk/JastAddJ/Java1.4Backend/LocalNum.jrag
+END
+README
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/jastadd-oxford/projects/!svn/ver/4018/trunk/JastAddJ/Java1.4Backend/README
+END
+build.xml
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/jastadd-oxford/projects/!svn/ver/9143/trunk/JastAddJ/Java1.4Backend/build.xml
+END
+.classpath
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/jastadd-oxford/projects/!svn/ver/2379/trunk/JastAddJ/Java1.4Backend/.classpath
+END
+GenerateClassfile.jrag
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/jastadd-oxford/projects/!svn/ver/5589/trunk/JastAddJ/Java1.4Backend/GenerateClassfile.jrag
+END
+ConstantPool.jrag
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/jastadd-oxford/projects/!svn/ver/5114/trunk/JastAddJ/Java1.4Backend/ConstantPool.jrag
+END
+CodeGeneration.jrag
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/jastadd-oxford/projects/!svn/ver/9128/trunk/JastAddJ/Java1.4Backend/CodeGeneration.jrag
+END
+Attributes.jrag
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/jastadd-oxford/projects/!svn/ver/5939/trunk/JastAddJ/Java1.4Backend/Attributes.jrag
+END
+Java2Rewrites.jrag
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/jastadd-oxford/projects/!svn/ver/9128/trunk/JastAddJ/Java1.4Backend/Java2Rewrites.jrag
+END
+FlushCaches.jrag
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/jastadd-oxford/projects/!svn/ver/8593/trunk/JastAddJ/Java1.4Backend/FlushCaches.jrag
+END
+InnerClasses.jrag
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/jastadd-oxford/projects/!svn/ver/7479/trunk/JastAddJ/Java1.4Backend/InnerClasses.jrag
+END
+Transformations.jrag
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/jastadd-oxford/projects/!svn/ver/5861/trunk/JastAddJ/Java1.4Backend/Transformations.jrag
+END
+Flags.jrag
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/jastadd-oxford/projects/!svn/ver/5114/trunk/JastAddJ/Java1.4Backend/Flags.jrag
+END
