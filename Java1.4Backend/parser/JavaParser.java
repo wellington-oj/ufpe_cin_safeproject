@@ -2448,7 +2448,8 @@ class Events extends Parser.Events {
 			}
 			case 238: // safe_statement = SAFE.SAFE block.b catches.c
 			{
-					final Symbol SAFE = _symbols[offset + 1];
+					final Symbol SAFE = _symbols[offset+1];
+					
 					final Symbol _symbol_b = _symbols[offset + 2];
 					final Block b = (Block) _symbol_b.value;
 					final Symbol _symbol_c = _symbols[offset + 3];
@@ -2457,7 +2458,7 @@ class Events extends Parser.Events {
 			}
 			case 239: // safe_statement = SAFE.SAFE block.b finally.f
 			{
-					final Symbol SAFE = _symbols[offset + 1];
+					final Symbol SAFE = _symbols[offset+1];
 					final Symbol _symbol_b = _symbols[offset + 2];
 					final Block b = (Block) _symbol_b.value;
 					final Symbol _symbol_f = _symbols[offset + 3];
@@ -2466,7 +2467,7 @@ class Events extends Parser.Events {
 			}
 			case 240: // safe_statement = SAFE.SAFE block.b catches.c finally.f
 			{
-					final Symbol SAFE = _symbols[offset + 1];
+					final Symbol SAFE = _symbols[offset+1];
 					final Symbol _symbol_b = _symbols[offset + 2];
 					final Block b = (Block) _symbol_b.value;
 					final Symbol _symbol_c = _symbols[offset + 3];

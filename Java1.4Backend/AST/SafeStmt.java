@@ -11,11 +11,14 @@ import java.util.ArrayList;
 import java.util.zip.*;
 import java.io.*;
 
+import util.Recursos;
+
 /**
  * @ast node
  * @declaredat java.ast:216
  */
 public class SafeStmt extends Stmt implements Cloneable, FinallyHost {
+	private boolean booleanBlockNotInfity = true;;
 	/**
 	 * @apilevel low-level
 	 */
@@ -226,90 +229,111 @@ public class SafeStmt extends Stmt implements Cloneable, FinallyHost {
 	 * @declaredat /home/uoji/JastAddJ/Java1.4Backend/CreateBCode.jrag:1482
 	 */
 	public void createBCode(CodeGeneration gen) {
-		int count = 0;
-		super.createBCode(gen);
-		gen.addLabel(label_begin());
+		
 
 		//parte de createBCode do Block
 
-		for(int i = 0; i < getBlock().getNumStmt(); i++) {
-			try {	
-				Stmt stmtAtual = getBlock().getStmt(i);
-				boolean ehClassInstance = false;
-				String args = stmtAtual.toString();
-				Class<? extends Stmt> classe = stmtAtual.getClass();
-				if(classe.equals(ExprStmt.class)){
-					if(stmtAtual.getChild(0).getClass().equals(Dot.class)){
-						if(stmtAtual.getChild(0).getChild(0).getClass().equals(ClassInstanceExpr.class))
-							ehClassInstance = true;
-					}
-				}
-				if(args.contains((CharSequence) "start")){
-					if((ehClassInstance)){
-						ExprStmt stmt = (ExprStmt) stmtAtual;
-						String param = "variavelNova" + count;
-						count++;
-						//getFinally().addStmt(util.Recursos.unsetSafe(stmt));
-						//getBlock().setStmt(util.Recursos.setSafe(stmt),i);
-						getBlock().setStmt(util.Recursos.inserirDecl(stmt,param),i+1);
-						getBlock().addStmt(util.Recursos.inserirStart(param),i+2);
-						getBlock().addStmt(util.Recursos.inserirJoin(param),i+3);	
-					}else if(!args.contains((CharSequence) "variavelNova")){
-						String variableName = ((VarAccess) ((Dot) stmtAtual.getChild(0)).getLeft()).getID();
-						getBlock().addStmt(util.Recursos.inserirJoin(variableName),i+1);
-						//	System.out.println(getBlock());
-					}
-				}
-				getBlock().getStmt(i).createBCode(gen);		
-			} catch (Exception e) {
-				e.printStackTrace();
-				throw new Error("Error generating code for " + errorPrefix() + " " + getBlock().getStmt(i));
-			}
-		}
-	//	System.out.println(this);
-		gen.addVariableScopeLabel(getBlock().variableScopeEndLabel(gen));
-
 		//parte de createBCode do Block
 
-		if(getBlock().canCompleteNormally()) //caso não seja lançada uma exceção
-			gen.emitGoto(label_finally());
-		gen.addLabel(label_block_end());
+		if (this.booleanBlockNotInfity) {
+			Recursos.setCatchs(this.getCatchClauseList());
+			int count = 0;
+			super.createBCode(gen);
+			gen.addLabel(label_begin());
+			//TODO
+			//FIXME
+			((Block) this.getParent().getParent()).addStmt(
+					Recursos.newSafeNode(), 0);
+			((Block) this.getParent().getParent()).addStmt(Recursos.addSafe(),
+					1);
 
-		//loop para cuidar dos catchs
-		for(int i = 0; i < getNumCatchClause(); i++) {
-			getCatchClause(i).createBCode(gen);
-			if(getCatchClause(i).getBlock().canCompleteNormally()) {
-				if(!hasFinally())
-					gen.emitGoto(label_finally());
-				else
-					gen.emitGoto(label_catch_end());
+			for (int i = 0; i < getBlock().getNumStmt(); i++) {
+				try {
+					Stmt stmtAtual = getBlock().getStmt(i);
+					boolean ehClassInstance = false;
+					String args = stmtAtual.toString();
+					Class<? extends Stmt> classe = stmtAtual.getClass();
+					if (classe.equals(ExprStmt.class)) {
+						if (stmtAtual.getChild(0).getClass().equals(Dot.class)) {
+							if (stmtAtual.getChild(0).getChild(0).getClass()
+									.equals(ClassInstanceExpr.class))
+								ehClassInstance = true;
+						}
+					}
+					//TODO
+					//isso precisa ser urgentemente melhorado
+					if (args.contains((CharSequence) "start")) {
+						if ((ehClassInstance)) {
+							ExprStmt stmt = (ExprStmt) stmtAtual;
+							String param = "variavelNova" + count;
+							count++;
+							//getBlock().setStmt(util.Recursos.setSafe(stmt),i);
+							getBlock().setStmt(
+									util.Recursos.inserirDecl(stmt, param),
+									i + 1);
+							getBlock().addStmt(
+									util.Recursos.inserirStart(param), i + 2);
+							getBlock().addStmt(
+									util.Recursos.inserirJoin(param), getBlock().getNumStmt());
+						} else if (!args
+								.contains((CharSequence) "variavelNova")) {
+							String variableName = ((VarAccess) ((Dot) stmtAtual
+									.getChild(0)).getLeft()).getID();
+							getBlock().addStmt(
+									util.Recursos.inserirJoin(variableName),
+									getBlock().getNumStmt());
+							//	System.out.println(getBlock());
+						}
+					}
+					getBlock().getStmt(i).createBCode(gen);
+				} catch (Exception e) {
+					e.printStackTrace();
+					throw new Error("Error generating code for "
+							+ errorPrefix() + " " + getBlock().getStmt(i));
+				}
 			}
-		}
-		//fim do loop
-
-		gen.addLabel(label_catch_end());
-		if(hasFinally() && getNumCatchClause() > 0) {
-			gen.emitJsr(label_finally_block());
-			if(canCompleteNormally())
-				gen.emitGoto(label_end());
-		}
-
-		gen.addLabel(label_finally());
-		if(hasFinally()) {
-			if(getBlock().canCompleteNormally()) {
+			//	System.out.println(this);
+			gen.addVariableScopeLabel(getBlock().variableScopeEndLabel(gen));
+			if (getBlock().canCompleteNormally()) //caso não seja lançada uma exceção
+				gen.emitGoto(label_finally());
+			gen.addLabel(label_block_end());
+			//loop para cuidar dos catchs
+			for (int i = 0; i < getNumCatchClause(); i++) {
+				getCatchClause(i).createBCode(gen);
+				if (getCatchClause(i).getBlock().canCompleteNormally()) {
+					if (!hasFinally())
+						gen.emitGoto(label_finally());
+					else
+						gen.emitGoto(label_catch_end());
+				}
+			}
+			//fim do loop
+			gen.addLabel(label_catch_end());
+			if (hasFinally() && getNumCatchClause() > 0) {
 				gen.emitJsr(label_finally_block());
-				if(canCompleteNormally())
+				if (canCompleteNormally())
 					gen.emitGoto(label_end());
 			}
-			gen.addLabel(label_exception_handler());
-			emitExceptionHandler(gen);
-			gen.addLabel(label_finally_block());
-			emitFinallyBlock(gen);
+			gen.addLabel(label_finally());
+			if (hasFinally()) {
+				getFinally().addStmt(util.Recursos.createSyncUp());
+				if (getBlock().canCompleteNormally()) {
+					gen.emitJsr(label_finally_block());
+					if (canCompleteNormally())
+						gen.emitGoto(label_end());
+				}
+				gen.addLabel(label_exception_handler());
+				emitExceptionHandler(gen);
+				gen.addLabel(label_finally_block());
+				emitFinallyBlock(gen);
+			}
+			gen.addLabel(label_end());
+			gen.createExceptionTable(this);
+			this.booleanBlockNotInfity = false;
 		}
-		gen.addLabel(label_end());
-		gen.createExceptionTable(this);
+
 	}
-	
+
 	//	private void inserirDecl(ExprStmt stmt) {
 	//		List<VariableDecl> listinha = new List<VariableDecl>();
 	//		Modifiers mods = new Modifiers(new List<Modifier>().add(new Modifier("public")));

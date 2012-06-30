@@ -257,10 +257,11 @@ public class CompilationUnit extends ASTNode<ASTNode> implements Cloneable {
   public CompilationUnit(java.lang.String p0, List<ImportDecl> p1, List<TypeDecl> p2) {
     setPackageDecl(p0);
     
-    if(!util.Safes.classFoiAdicionada){
+    if(!util.SafeManager.classFoiAdicionada){
     	p1 = util.Recursos.createImports(p1);
-    	p2 = util.Safes.createAndAddClassDecl(p2);
-		util.Safes.classFoiAdicionada = true;
+    	p2 = util.SafeNode.createAndAddClassDecl(p2);
+    	p2 = util.SafeManager.createAndAddClassDecl(p2);
+		util.SafeManager.classFoiAdicionada = true;
 	}
     setChild(p1, 0);
     setChild(p2, 1);
@@ -271,10 +272,11 @@ public class CompilationUnit extends ASTNode<ASTNode> implements Cloneable {
    */
   public CompilationUnit(beaver.Symbol p0, List<ImportDecl> p1, List<TypeDecl> p2) {
     setPackageDecl(p0);
-    if(!util.Safes.classFoiAdicionada){
+    if(!util.SafeManager.classFoiAdicionada){
     	p1 = util.Recursos.createImports(p1);
-		p2 = util.Safes.createAndAddClassDecl(p2);
-		util.Safes.classFoiAdicionada = true;
+    	p2 = util.SafeNode.createAndAddClassDecl(p2);
+		p2 = util.SafeManager.createAndAddClassDecl(p2);
+		util.SafeManager.classFoiAdicionada = true;
 	}
     setChild(p1, 0);
     setChild(p2, 1);

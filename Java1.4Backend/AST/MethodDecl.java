@@ -21,8 +21,6 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet, Iter
 	 * @apilevel low-level
 	 */
 
-	boolean umavez = false;
-
 	public void flushCache() {
 		super.flushCache();
 		accessibleFrom_TypeDecl_values = null;
@@ -149,6 +147,7 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet, Iter
 	 */
 
 	private MethodDecl iterElem;
+	private boolean umavez = true;
 	/**
 	 * @ast method 
 	 * @aspect DataStructures
@@ -383,14 +382,15 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet, Iter
 		try {
 			if(hasBlock()) {
 				if(this.getID().equals("run")){
-					if(!umavez){
+					//bug. esse booleano impede o problema de entrar em loop.
+					if(this.umavez){
 						List<Stmt> lista = new List<Stmt>();
 						for (int i = 0; i < getBlock().getChild(0).getNumChild(); i++) {
 							lista.add((Stmt) getBlock().getChild(0).getChild(i));
 						}
 						Block blocoAntigo = new Block(lista);
 					    this.setBlock(util.Recursos.createIfStmtMethodDecl(blocoAntigo));
-						umavez = true;
+					    this.umavez = false;
 					}
 					
 				}		
@@ -399,7 +399,17 @@ public class MethodDecl extends MemberDecl implements Cloneable, SimpleSet, Iter
 			}
 			//System.out.println((this.getParent().getParent()));
 			//TODO
-			Recursos.recursividade(this.getParent());
+			//Recursos.recursividade(this.getParent());
+			ASTNode referencial = this.getParent();
+			while(referencial.getClass() != ClassDecl.class){
+				referencial = referencial.getParent();
+			}
+			System.out.println(referencial);
+			//TODO
+//			System.out.println(this.getID());
+//			if(this.getID().equals("test")){
+//				System.out.println("UEPA");
+//			}
 //			ASTNode node = this.getParent();
 //			while(node.getClass() != CompilationUnit.class){
 //				node = node.getParent();

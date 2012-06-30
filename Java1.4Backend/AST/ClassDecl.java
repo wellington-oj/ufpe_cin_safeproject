@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.zip.*;
 import java.io.*;
 
-import util.Safes;
+import util.SafeManager;
 
 
 /**
@@ -462,7 +462,7 @@ public class ClassDecl extends ReferenceType implements Cloneable {
 		setID(p1);
 		setChild(p2, 1);
 		setChild(p3, 2);
-		setChild(p4, 3);		
+		setChild(p4, 3);
 	}
 	/**
 	 * @ast method 
