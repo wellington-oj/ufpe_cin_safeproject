@@ -1,6 +1,6 @@
-public class TestClass {
+public class newTeste {
 
-	public TestClass() {
+	public newTeste() {
 		
 		safe {
 			System.out.println(10);	
@@ -17,7 +17,7 @@ public class TestClass {
 	}
 	
 	public static void main(String[] args) {
-		new TestClass();
+		new newTeste();
 	}
 
 }
